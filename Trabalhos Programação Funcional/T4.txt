@@ -1,0 +1,114 @@
+Exercicio de P.F em Haskell
+
+Guilherme Rafael Cerqueira Dias         	12011BSI202
+
+1)Considere as duas listas a seguir:
+ls1 = [3,1,4,1,5]
+ls2 = [1,6,1,8,0]
+Mostre a saida das seguintes expressoes, quando corretamente executadas.Explique o que
+acontece quando houver erro.
+
+a)ls1 > (tail ls2)
+  -False,O primeiro elemento de ls1 ( 3) é menor que 6,que é o primeiro elemento de tail[1,6,1,8,0] que gera [6,1,8,0].
+
+b)(tail ls1) ++ ls2
+  -[1,4,1,5,1,6,1,8,0]
+
+c)head (tail(tail ls1))
+  -4
+
+d)fst (head ls1,tail ls2)
+  -3
+
+e)3 ++ ls1
+  -Erro,o argumento de entrada nao esta entre colchetes, caso esteja ele sera aplicado na "ls1"
+
+f)snd(head ls1,tail ls2)
+  -[6,1,8,0]
+
+g)"1,2,3" ++ ls1
+  -Erro, para implementar argummentos na "ls1" é preciso ser do tipo Num,e neste caso esta 
+sendo aplicado uma String,causando erro.
+
+h)(head(tail ls2),tail ls1)
+  -(6,[1,4,1,5])
+
+i)head ls1 ++ ls1
+  -Erro, o argumento resultante de "head ls1" nao esta entre colchetes, logo ele nao sera
+aplicado em ls1.
+
+j)ls2 ++ [1..7]
+  -[1,6,1,8,0,1,2,3,4,5,6,7]
+
+k)[9] ++ ls1 ++ ls2
+  -[9,3,1,4,1,5,1,6,1,8,0]
+
+2)Usando as funcoes head e tail, defina a funcao terceiro que devolve o terceiro elemento de uma lista 
+de inteiros.
+(Considerando "[]" como uma lista generica,temos:)
+
+terceiro :: [Int] -> Int
+terceiro [] = head (tail(tail []))
+
+3)Considere a funcao reverse do preludio padrao.
+>reverse [1,2,3]
+ - [3,2,1]
+Utilizando essa funcao,alem das funcoes head e tail, crie as seguintes funcoes:
+
+(a)Funcao ultimo que devolve o ultimo elemento de uma String.
+
+ultimo :: "String" -> 'Char'
+ultimo "String"=head(reverse "string")
+
+(b)Funcao incio, que devolve todos elementos da string,exceto o ultimo.
+
+inicio :: "String" -> "String"
+inicio "String" = reverse(tail(reverse "String"))
+
+4)Implemente uma funcao que receba o primeiro e o ultimo nome de alguem e retorne suas iniciais em uma 
+tupla.
+
+iniciais :: "String""String" -> ('Char','Char')
+iniciais "String""String" = (head "String",head "String")
+
+5)O operador :,chamado construtor, permite construir uma lista a partir de um conjunto de
+elementos. Execute as seguintes expressoes e tente entender o que esta sendo feito.
+
+1:[2,3,4]
+ -[1,2,3,4]
+
+1:2:3:4:[]
+ -[1,2,3,4]
+
+[1,2,3]:[4..7]
+ -Erro,nao agrupa listas ,apenas elementos anteriores como por exemplo um Num.
+
+1:['a','b']
+ -Erro ,nao agrupa elementos distintos em uma mesma lista.
+
+"a":"bCc"
+ -Erro,nao agrupa elementos de mesmo tipo, apenas elementos anteriores.Que no caso poderia ser
+um Char aplicado em um String.
+
+'a':'b'
+ -Erro, nao agrupa elementos de mesmo tipo a nao ser que estejam em uma lista.
+
+'a':"b"
+ -"ab"
+
+[1,4,7] ++ 4:[5:[]]
+ -Erro,existe varios erros neste caso , o numero 5"" sera agrupado em uma lista porem ficara
+uma lista dentro de outra lista causando erro pois o "4" nao seraa agrupado.Caso a sugunda
+lista estivesse correta a primeira lista seria somada formando a soma da primeira com a 
+segunda em uma unica lista.
+
+[True,True:[]]
+ -Erro,o segundo "True" vai ser aplicado em uma lista , porem o primeiro "True" nao sera 
+aplicado a mesma lista pois nao existe o operador construtor neste caso.
+
+True:[True,False]
+ -[True,True,False]
+ 
+
+
+

@@ -1,0 +1,29 @@
+type Dia = Int
+type Mes = Int
+type Ano = Int
+type Data = (Dia,Mes,Ano)
+
+bissexto :: Ano -> Bool
+bissexto ano
+ |mod ano 4 == 0 || mod ano 400 == 0  = True
+ |otherwise    = False
+
+numDeDiasEmCadaMesDeUmAno :: Ano -> [Int]
+numDeDiasEmCadaMesDeUmAno ano = [31,feb,31,30,31,30,31,31,30,31,30,31]
+  where feb = if bissexto ano then 29 else 28
+   
+
+numDeDias :: Data -> Int
+numDeDias (dia,mes,ano) = dia + sum (take (mes-1) (numDeDiasEmCadaMesDeUmAno ano)) + (ano-2001)*365 + (ano-2001)`div`4
+
+nomeDoDia :: Int -> String
+nomeDoDia 0 = "Domingo"
+nomeDoDia 1 = "Segunda-Feira"
+nomeDoDia 2 = "Terca-Feira"
+nomeDoDia 3 = "Quarta-Feira"
+nomeDoDia 4 = "Quinta-Feira"
+nomeDoDia 5 = "Sexta-Feira"
+nomeDoDia 6 = "Sabado"
+
+diaDaSemana :: Data -> String
+diaDaSemana (dia,mes,ano) = nomeDoDia (numDeDias (dia,mes,ano) `mod` 7)
